@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>LegallyWise AI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    #answer {
+      border: 2px solid #392f5a;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      min-height: 200px;
+    }
+    #question-input {
+      width: 50%;
+      height: 100px;
+      font-size: 20px;
+      padding: 20px;
+      border: 2px solid #392f5a;
+      border-radius: 10px;
+      margin: 0 auto 20px auto;
+      display: block;
+    }
+    button[type="submit"] {
+      background-color: #e46461;
+      border-color: #9dd9d2;
+      color: #e0dfd5;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 30px;
+    }
+  </style>
+  
+</head>
+<body>
+  
+  <!-- Header -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">LegallyWise AI</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Content -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-center my-5">Welcome to LegallyWise AI!</h1>
+        <form>
+          <input id="question-input" type="text" class="form-control" placeholder="Enter your legal question">
+          <button type="submit" class="btn btn-primary d-block mx-auto">Ask a Question</button>
+        </form>
+        <div class="row justify-content-center">
+          <div class="col-sm-8">
+            <div id="answer" class="my-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('form').submit(function(event) {
+      event.preventDefault();
+      submitQuestion();
+    });
+
+    function submitQuestion() {
+      var question = $('#question-input').val();
+      $.ajax({
+        url: 'https://legallywiseai.com/api/ask',
+        type: 'POST',
+        data: { question: question },
+        success: function(response) {
+          $('#answer').html(response.answer);
+        },
+        error: function(xhr) {
+          alert('Error: ' + xhr.statusText);
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
