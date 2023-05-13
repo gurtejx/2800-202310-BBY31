@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config();
-const { Configuration, OpenAIApi } = require("openai");
+const { Configuration, OpenAIApi } = require("./custom/openai");
 
 const app = express();
 
